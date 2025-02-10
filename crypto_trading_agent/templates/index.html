@@ -35,12 +35,27 @@
                 </div>
             </div>
             <div class="col-md-4">
+                <div class="card stats-card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">投资组合表现</h5>
+                        <div class="mt-4">
+                            <h3>当前价值: $<span id="portfolioValue">-</span></h3>
+                            <h4>投资回报率: <span id="roi">-</span>%</h4>
+                            <p class="mb-2">初始资金: $<span id="initialCapital">-</span></p>
+                            <p class="mb-2">当前BTC价格: $<span id="currentPrice">-</span></p>
+                            <p class="mb-2">持仓数量: <span id="currentHoldings">-</span> BTC</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="card stats-card">
                     <div class="card-body">
-                        <h5 class="card-title">Performance Metrics</h5>
+                        <h5 class="card-title">交易统计</h5>
                         <div class="mt-4">
-                            <h3>Portfolio Value: $<span id="portfolioValue">-</span></h3>
-                            <h4>ROI: <span id="roi">-</span>%</h4>
+                            <p class="mb-2">总交易次数: <span id="totalTrades">-</span></p>
+                            <p class="mb-2">盈利交易: <span id="profitableTrades">-</span></p>
+                            <p class="mb-2">胜率: <span id="winRate">-</span>%</p>
+                            <p class="mb-2">最大单笔盈利: $<span id="maxProfit">-</span></p>
+                            <p class="mb-2">最大回撤: $<span id="maxDrawdown">-</span></p>
                         </div>
                     </div>
                 </div>
@@ -126,8 +141,19 @@
         }
 
         function updateStats(data) {
+            // 更新投资组合数据
             document.getElementById('portfolioValue').textContent = data.final_value.toLocaleString();
             document.getElementById('roi').textContent = data.roi;
+            document.getElementById('initialCapital').textContent = data.stats.initial_capital.toLocaleString();
+            document.getElementById('currentPrice').textContent = data.stats.current_price.toLocaleString();
+            document.getElementById('currentHoldings').textContent = data.stats.current_holdings;
+            
+            // 更新交易统计
+            document.getElementById('totalTrades').textContent = data.stats.total_trades;
+            document.getElementById('profitableTrades').textContent = data.stats.profitable_trades;
+            document.getElementById('winRate').textContent = data.stats.win_rate;
+            document.getElementById('maxProfit').textContent = data.stats.max_profit.toLocaleString();
+            document.getElementById('maxDrawdown').textContent = data.stats.max_drawdown.toLocaleString();
         }
 
         function updateTradeHistory(history) {
