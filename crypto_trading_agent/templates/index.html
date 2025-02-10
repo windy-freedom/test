@@ -19,88 +19,247 @@
             background: linear-gradient(135deg, #6B73FF 0%, #000DFF 100%);
             color: white;
         }
+        .stats-card.eth {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF0D0D 100%);
+        }
+        .crypto-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+        }
+        .crypto-title {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ddd;
+        }
+        .insight-card {
+            background: linear-gradient(135deg, #43C6AC 0%, #191654 100%);
+            color: white;
+        }
+        .strategy-weight {
+            height: 20px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .confidence-meter {
+            width: 100%;
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        .confidence-value {
+            height: 100%;
+            border-radius: 5px;
+            background-color: #4CAF50;
+        }
+        .analysis-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .analysis-list li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .analysis-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+        }
     </style>
 </head>
 <body class="bg-light">
     <div class="container py-5">
         <h1 class="text-center mb-5">AI Crypto Trading Agent Simulation</h1>
         
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Price Chart & Trading Activity</h5>
-                        <canvas id="priceChart"></canvas>
+        <!-- BTC Section -->
+        <div class="crypto-section">
+            <h2 class="crypto-title">Bitcoin (BTC) Trading</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">BTC Price Chart & Trading Activity</h5>
+                            <canvas id="btcPriceChart"></canvas>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card stats-card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">投资组合表现</h5>
-                        <div class="mt-4">
-                            <h3>当前价值: $<span id="portfolioValue">-</span></h3>
-                            <h4>投资回报率: <span id="roi">-</span>%</h4>
-                            <p class="mb-2">初始资金: $<span id="initialCapital">-</span></p>
-                            <p class="mb-2">当前BTC价格: $<span id="currentPrice">-</span></p>
-                            <p class="mb-2">持仓数量: <span id="currentHoldings">-</span> BTC</p>
+                    <div class="card insight-card">
+                        <div class="card-body">
+                            <h5 class="card-title">AI Strategy Weights</h5>
+                            <div class="mt-3">
+                                <p class="mb-2">Trend Following</p>
+                                <div class="progress">
+                                    <div id="btcTrendWeight" class="progress-bar bg-info" role="progressbar"></div>
+                                </div>
+                                <p class="mb-2 mt-3">Momentum</p>
+                                <div class="progress">
+                                    <div id="btcMomentumWeight" class="progress-bar bg-success" role="progressbar"></div>
+                                </div>
+                                <p class="mb-2 mt-3">Volatility</p>
+                                <div class="progress">
+                                    <div id="btcVolatilityWeight" class="progress-bar bg-warning" role="progressbar"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="card stats-card">
-                    <div class="card-body">
-                        <h5 class="card-title">交易统计</h5>
-                        <div class="mt-4">
-                            <p class="mb-2">总交易次数: <span id="totalTrades">-</span></p>
-                            <p class="mb-2">盈利交易: <span id="profitableTrades">-</span></p>
-                            <p class="mb-2">胜率: <span id="winRate">-</span>%</p>
-                            <p class="mb-2">最大单笔盈利: $<span id="maxProfit">-</span></p>
-                            <p class="mb-2">最大回撤: $<span id="maxDrawdown">-</span></p>
+                <div class="col-md-4">
+                    <div class="card stats-card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">BTC投资组合表现</h5>
+                            <div class="mt-4">
+                                <h3>当前价值: $<span id="btcPortfolioValue">-</span></h3>
+                                <h4>投资回报率: <span id="btcRoi">-</span>%</h4>
+                                <p class="mb-2">初始资金: $<span id="btcInitialCapital">-</span></p>
+                                <p class="mb-2">当前BTC价格: $<span id="btcCurrentPrice">-</span></p>
+                                <p class="mb-2">持仓数量: <span id="btcCurrentHoldings">-</span> BTC</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card stats-card">
+                        <div class="card-body">
+                            <h5 class="card-title">BTC交易统计</h5>
+                            <div class="mt-4">
+                                <p class="mb-2">总交易次数: <span id="btcTotalTrades">-</span></p>
+                                <p class="mb-2">盈利交易: <span id="btcProfitableTrades">-</span></p>
+                                <p class="mb-2">胜率: <span id="btcWinRate">-</span>%</p>
+                                <p class="mb-2">最大单笔盈利: $<span id="btcMaxProfit">-</span></p>
+                                <p class="mb-2">最大回撤: $<span id="btcMaxDrawdown">-</span></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="card mt-4">
-            <div class="card-body">
-                <h5 class="card-title">Trading History</h5>
-                <div class="trade-history">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Action</th>
-                                <th>Price</th>
-                                <th>Portfolio Value</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tradeHistory"></tbody>
-                    </table>
+        <!-- ETH Section -->
+        <div class="crypto-section">
+            <h2 class="crypto-title">Ethereum (ETH) Trading</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">ETH Price Chart & Trading Activity</h5>
+                            <canvas id="ethPriceChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card insight-card">
+                        <div class="card-body">
+                            <h5 class="card-title">AI Strategy Weights</h5>
+                            <div class="mt-3">
+                                <p class="mb-2">Trend Following</p>
+                                <div class="progress">
+                                    <div id="ethTrendWeight" class="progress-bar bg-info" role="progressbar"></div>
+                                </div>
+                                <p class="mb-2 mt-3">Momentum</p>
+                                <div class="progress">
+                                    <div id="ethMomentumWeight" class="progress-bar bg-success" role="progressbar"></div>
+                                </div>
+                                <p class="mb-2 mt-3">Volatility</p>
+                                <div class="progress">
+                                    <div id="ethVolatilityWeight" class="progress-bar bg-warning" role="progressbar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stats-card eth mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">ETH投资组合表现</h5>
+                            <div class="mt-4">
+                                <h3>当前价值: $<span id="ethPortfolioValue">-</span></h3>
+                                <h4>投资回报率: <span id="ethRoi">-</span>%</h4>
+                                <p class="mb-2">初始资金: $<span id="ethInitialCapital">-</span></p>
+                                <p class="mb-2">当前ETH价格: $<span id="ethCurrentPrice">-</span></p>
+                                <p class="mb-2">持仓数量: <span id="ethCurrentHoldings">-</span> ETH</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card stats-card eth">
+                        <div class="card-body">
+                            <h5 class="card-title">ETH交易统计</h5>
+                            <div class="mt-4">
+                                <p class="mb-2">总交易次数: <span id="ethTotalTrades">-</span></p>
+                                <p class="mb-2">盈利交易: <span id="ethProfitableTrades">-</span></p>
+                                <p class="mb-2">胜率: <span id="ethWinRate">-</span>%</p>
+                                <p class="mb-2">最大单笔盈利: $<span id="ethMaxProfit">-</span></p>
+                                <p class="mb-2">最大回撤: $<span id="ethMaxDrawdown">-</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trading History and Insights -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">BTC Trading History & Insights</h5>
+                        <div class="trade-history">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                        <th>Price</th>
+                                        <th>Portfolio Value</th>
+                                        <th>AI Analysis</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="btcTradeHistory"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">ETH Trading History & Insights</h5>
+                        <div class="trade-history">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                        <th>Price</th>
+                                        <th>Portfolio Value</th>
+                                        <th>AI Analysis</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ethTradeHistory"></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        let priceChart;
+        let btcPriceChart, ethPriceChart;
 
         async function fetchSimulationData() {
             try {
                 const response = await fetch('/simulate');
                 const data = await response.json();
-                updateChart(data);
+                updateCharts(data);
                 updateStats(data);
-                updateTradeHistory(data.history);
+                updateTradeHistory(data);
+                updateStrategyWeights(data);
             } catch (error) {
                 console.error('Error fetching simulation data:', error);
             }
         }
 
-        function updateChart(data) {
-            const ctx = document.getElementById('priceChart').getContext('2d');
-            
-            // Create buy/sell point annotations
+        function createChart(ctx, data, symbol) {
             const tradePoints = data.history.map(trade => ({
                 type: 'point',
                 xValue: data.dates.indexOf(trade.timestamp),
@@ -109,18 +268,14 @@
                 radius: 5
             }));
 
-            if (priceChart) {
-                priceChart.destroy();
-            }
-
-            priceChart = new Chart(ctx, {
+            return new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: data.dates,
                     datasets: [{
-                        label: 'BTC-USD Price',
+                        label: `${symbol} Price`,
                         data: data.prices,
-                        borderColor: 'rgb(75, 192, 192)',
+                        borderColor: symbol === 'BTC' ? 'rgb(75, 192, 192)' : 'rgb(255, 99, 132)',
                         tension: 0.1,
                         fill: false
                     }]
@@ -140,36 +295,98 @@
             });
         }
 
-        function updateStats(data) {
-            // 更新投资组合数据
-            document.getElementById('portfolioValue').textContent = data.final_value.toLocaleString();
-            document.getElementById('roi').textContent = data.roi;
-            document.getElementById('initialCapital').textContent = data.stats.initial_capital.toLocaleString();
-            document.getElementById('currentPrice').textContent = data.stats.current_price.toLocaleString();
-            document.getElementById('currentHoldings').textContent = data.stats.current_holdings;
+        function updateCharts(data) {
+            const btcCtx = document.getElementById('btcPriceChart').getContext('2d');
+            const ethCtx = document.getElementById('ethPriceChart').getContext('2d');
             
-            // 更新交易统计
-            document.getElementById('totalTrades').textContent = data.stats.total_trades;
-            document.getElementById('profitableTrades').textContent = data.stats.profitable_trades;
-            document.getElementById('winRate').textContent = data.stats.win_rate;
-            document.getElementById('maxProfit').textContent = data.stats.max_profit.toLocaleString();
-            document.getElementById('maxDrawdown').textContent = data.stats.max_drawdown.toLocaleString();
+            if (btcPriceChart) btcPriceChart.destroy();
+            if (ethPriceChart) ethPriceChart.destroy();
+            
+            btcPriceChart = createChart(btcCtx, data.btc, 'BTC');
+            ethPriceChart = createChart(ethCtx, data.eth, 'ETH');
         }
 
-        function updateTradeHistory(history) {
-            const tbody = document.getElementById('tradeHistory');
-            tbody.innerHTML = '';
+        function updateStats(data) {
+            // Update BTC stats
+            document.getElementById('btcPortfolioValue').textContent = data.btc.final_value.toLocaleString();
+            document.getElementById('btcRoi').textContent = data.btc.roi;
+            document.getElementById('btcInitialCapital').textContent = data.btc.stats.initial_capital.toLocaleString();
+            document.getElementById('btcCurrentPrice').textContent = data.btc.stats.current_price.toLocaleString();
+            document.getElementById('btcCurrentHoldings').textContent = data.btc.stats.current_holdings;
+            document.getElementById('btcTotalTrades').textContent = data.btc.stats.total_trades;
+            document.getElementById('btcProfitableTrades').textContent = data.btc.stats.profitable_trades;
+            document.getElementById('btcWinRate').textContent = data.btc.stats.win_rate;
+            document.getElementById('btcMaxProfit').textContent = data.btc.stats.max_profit.toLocaleString();
+            document.getElementById('btcMaxDrawdown').textContent = data.btc.stats.max_drawdown.toLocaleString();
             
-            history.forEach(trade => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${trade.timestamp}</td>
-                    <td><span class="badge bg-${trade.action === 'BUY' ? 'success' : 'danger'}">${trade.action}</span></td>
-                    <td>$${trade.price.toLocaleString()}</td>
-                    <td>$${(trade.cash + trade.holdings_value).toLocaleString()}</td>
-                `;
-                tbody.appendChild(row);
-            });
+            // Update ETH stats
+            document.getElementById('ethPortfolioValue').textContent = data.eth.final_value.toLocaleString();
+            document.getElementById('ethRoi').textContent = data.eth.roi;
+            document.getElementById('ethInitialCapital').textContent = data.eth.stats.initial_capital.toLocaleString();
+            document.getElementById('ethCurrentPrice').textContent = data.eth.stats.current_price.toLocaleString();
+            document.getElementById('ethCurrentHoldings').textContent = data.eth.stats.current_holdings;
+            document.getElementById('ethTotalTrades').textContent = data.eth.stats.total_trades;
+            document.getElementById('ethProfitableTrades').textContent = data.eth.stats.profitable_trades;
+            document.getElementById('ethWinRate').textContent = data.eth.stats.win_rate;
+            document.getElementById('ethMaxProfit').textContent = data.eth.stats.max_profit.toLocaleString();
+            document.getElementById('ethMaxDrawdown').textContent = data.eth.stats.max_drawdown.toLocaleString();
+        }
+
+        function updateStrategyWeights(data) {
+            // Update BTC weights
+            document.getElementById('btcTrendWeight').style.width = `${data.btc.stats.strategy_weights.trend * 100}%`;
+            document.getElementById('btcTrendWeight').textContent = `${(data.btc.stats.strategy_weights.trend * 100).toFixed(1)}%`;
+            
+            document.getElementById('btcMomentumWeight').style.width = `${data.btc.stats.strategy_weights.momentum * 100}%`;
+            document.getElementById('btcMomentumWeight').textContent = `${(data.btc.stats.strategy_weights.momentum * 100).toFixed(1)}%`;
+            
+            document.getElementById('btcVolatilityWeight').style.width = `${data.btc.stats.strategy_weights.volatility * 100}%`;
+            document.getElementById('btcVolatilityWeight').textContent = `${(data.btc.stats.strategy_weights.volatility * 100).toFixed(1)}%`;
+            
+            // Update ETH weights
+            document.getElementById('ethTrendWeight').style.width = `${data.eth.stats.strategy_weights.trend * 100}%`;
+            document.getElementById('ethTrendWeight').textContent = `${(data.eth.stats.strategy_weights.trend * 100).toFixed(1)}%`;
+            
+            document.getElementById('ethMomentumWeight').style.width = `${data.eth.stats.strategy_weights.momentum * 100}%`;
+            document.getElementById('ethMomentumWeight').textContent = `${(data.eth.stats.strategy_weights.momentum * 100).toFixed(1)}%`;
+            
+            document.getElementById('ethVolatilityWeight').style.width = `${data.eth.stats.strategy_weights.volatility * 100}%`;
+            document.getElementById('ethVolatilityWeight').textContent = `${(data.eth.stats.strategy_weights.volatility * 100).toFixed(1)}%`;
+        }
+
+        function updateTradeHistory(data) {
+            function updateTable(history, tableId) {
+                const tbody = document.getElementById(tableId);
+                tbody.innerHTML = '';
+                
+                history.forEach(trade => {
+                    const row = document.createElement('tr');
+                    const insight = trade.insight || {};
+                    const insightHtml = insight.analysis ? `
+                        <div>
+                            <strong>${insight.recommendation}</strong>
+                            <div class="confidence-meter">
+                                <div class="confidence-value" style="width: ${insight.confidence * 100}%"></div>
+                            </div>
+                            <ul class="analysis-list">
+                                ${insight.analysis.map(point => `<li>${point}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : '';
+                    
+                    row.innerHTML = `
+                        <td>${trade.timestamp}</td>
+                        <td><span class="badge bg-${trade.action === 'BUY' ? 'success' : 'danger'}">${trade.action}</span></td>
+                        <td>$${trade.price.toLocaleString()}</td>
+                        <td>$${(trade.cash + trade.holdings_value).toLocaleString()}</td>
+                        <td>${insightHtml}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+            
+            updateTable(data.btc.history, 'btcTradeHistory');
+            updateTable(data.eth.history, 'ethTradeHistory');
         }
 
         // Initial fetch
